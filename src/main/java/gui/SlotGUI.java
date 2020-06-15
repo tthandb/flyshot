@@ -15,6 +15,7 @@ public class SlotGUI extends JPanel {
         setSize(200, 300);
         setBorder(new LineBorder(Color.GRAY));
         setBounds(x, y, Constants.SLOT_WIDTH, Constants.SLOT_HEIGHT);
+        setBackground(Color.decode("#E1FFFF"));
         initUI();
     }
 

@@ -34,8 +34,8 @@ public class ServerListener {
     }
 
     private void controlChangeLevel(ChangeLevel packet, Connection connection) {
-        Room.setLevel(packet.level);
-        RoomUpdate roomUpdate = new RoomUpdate(Room.clients, Room.getLevel());
+        RoomServer.setLevel(packet.level);
+        RoomUpdate roomUpdate = new RoomUpdate(RoomServer.clients, RoomServer.getLevel());
         for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
 
             Connection c = entry.getValue();
@@ -45,10 +45,10 @@ public class ServerListener {
 
     private void controlReadyRequest(ReadyRequest packet, Connection connection) {
         if (connection.id == packet.id) {
-            Room.clients.forEach(waitingClient -> {
+            RoomServer.clients.forEach(waitingClient -> {
                 if (waitingClient.id == connection.id)
                     waitingClient.isReady = packet.isReady;
-                RoomUpdate roomUpdate = new RoomUpdate(Room.clients, Room.getLevel());
+                RoomUpdate roomUpdate = new RoomUpdate(RoomServer.clients, RoomServer.getLevel());
                 for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
                     Connection c = entry.getValue();
                     c.sendObject(roomUpdate);
@@ -64,8 +64,8 @@ public class ServerListener {
             boolean isReady = packet.isHost;
 
             WaitingClient client = new WaitingClient(packet.id, packet.playerName, isReady, packet.isHost);
-            Room.clients.add(client);
-            RoomUpdate roomUpdate = new RoomUpdate(Room.clients, Room.getLevel());
+            RoomServer.clients.add(client);
+            RoomUpdate roomUpdate = new RoomUpdate(RoomServer.clients, RoomServer.getLevel());
 
             for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
                 Connection c = entry.getValue();
@@ -91,15 +91,15 @@ public class ServerListener {
     }
 
     private void controlStartGameRequest(StartGameRequest packet, Connection connection) {
-        if (connection.id == Room.clients.get(0).id) {
+        if (connection.id == RoomServer.clients.get(0).id) {
             System.out.println("Server Server Listener Start");
             for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
                 Connection c = entry.getValue();
                 ArrayList<PlayerInGame> playerInGames = new ArrayList<>();
-                int numberOfPlayers = Room.clients.size();
+                int numberOfPlayers = RoomServer.clients.size();
                 for (int i = 0; i < numberOfPlayers; ++i) {
                     int distance = (Constants.GAME_WIDTH) / numberOfPlayers;
-                    PlayerInGame playerInGame = new PlayerInGame(33 + distance / 2 + (i * distance), Constants.GAME_HEIGHT + 20, Room.clients.get(i).id, i);
+                    PlayerInGame playerInGame = new PlayerInGame(33 + distance / 2 + (i * distance), Constants.GAME_HEIGHT + 20, RoomServer.clients.get(i).id, i);
                     playerInGames.add(playerInGame);
                 }
                 c.sendObject(new StartGameResponse(playerInGames));

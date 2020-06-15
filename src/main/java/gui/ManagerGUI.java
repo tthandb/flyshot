@@ -53,9 +53,11 @@ public class ManagerGUI {
                 String playerName;
                 Boolean isHost = false;
                 if (args != null) {
-                    if (args.containsKey("playerName")) playerName = args.get("playerName").toString();
+                    if (args.containsKey("playerName"))
+                        playerName = args.get("playerName").toString();
                     else playerName = "PlayerNameDefault";
-                    if (args.containsKey("isHost")) isHost = (Boolean) args.get("isHost");
+                    if (args.containsKey("isHost"))
+                        isHost = (Boolean) args.get("isHost");
                 } else playerName = "PlayerNameDefault";
                 window.getContentPane().removeAll();
                 window.getContentPane().add(getNewRoomScreen(playerName, isHost));
@@ -71,6 +73,10 @@ public class ManagerGUI {
             case Constants.INGAME_SCREEN -> openNewScreen(getInGameScreen(args));
         }
 
+    }
+
+    private synchronized JPanel getInGameScreen(HashMap<String, Object> args) {
+        return new InGameGUI(Constants.IN_GAME_SCREEN_WIDTH, Constants.IN_GAME_SCREEN_HEIGHT, args);
     }
 
     private void openNewScreen(JPanel screen) {
@@ -101,9 +107,6 @@ public class ManagerGUI {
         return roomGUI;
     }
 
-    private synchronized JPanel getInGameScreen(HashMap<String, Object> args) {
-        return new InGameGUI(Constants.IN_GAME_SCREEN_WIDTH, Constants.IN_GAME_SCREEN_HEIGHT, args);
-    }
 
     public JFrame getWindow() {
         return this.window;

@@ -5,6 +5,7 @@ import client.Player;
 import com.google.common.eventbus.Subscribe;
 import model.Constants;
 import packet.*;
+import server.RoomServer;
 import server.WaitingClient;
 
 import javax.swing.*;
@@ -18,16 +19,15 @@ import java.util.Vector;
 
 public class RoomGUI extends JPanel implements ActionListener {
     private ManagerGUI managerGUI;
-    private JButton exitBtn;
     private JButton startGameBtn;
     private JButton readyBtn;
     private ArrayList<SlotGUI> slotGUIS;
-    private final int[] slotY = {210, 280, 350, 420};
+    private final int[] slotY = {280, 350, 420};
     private JComboBox<String> levelSelector;
 
     private final Vector<String> levels;
 
-    private server.Room room;
+    private RoomServer roomServer;
 
     private Player player;
     public String playerName;
@@ -40,6 +40,7 @@ public class RoomGUI extends JPanel implements ActionListener {
         levels.add("Super");
         setSize(width, height);
         setLayout(null);
+        setBackground(Color.decode("#fee9e9"));
         initUI();
         setVisible(false);
         if (args != null) {
@@ -60,9 +61,10 @@ public class RoomGUI extends JPanel implements ActionListener {
     }
 
     private void renderHostGUI() {
-        startGameBtn = new JButton("Start Game");
-        startGameBtn.setBounds(20, 40, 110, 25);
-        startGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 14));
+        startGameBtn = new JButton("Start");
+        startGameBtn.setBounds(50, 40, 70, 25);
+        startGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.BOLD, 12));
+        startGameBtn.setBackground(Color.decode("#E1FFFF"));
         startGameBtn.addActionListener(this);
         levelSelector.setEnabled(true);
 
@@ -71,8 +73,8 @@ public class RoomGUI extends JPanel implements ActionListener {
     }
 
     private void initRoomServer() {
-        room = new server.Room(Constants.HOST_PORT);
-        room.start();
+        roomServer = new RoomServer(Constants.HOST_PORT);
+        roomServer.start();
     }
 
     private void initPlayer(boolean isHost) {
@@ -94,7 +96,6 @@ public class RoomGUI extends JPanel implements ActionListener {
     }
 
     private void initUI() {
-        exitBtn = new JButton("Exit RoomGUI");
         readyBtn = new JButton("Ready");
         JSeparator separator = new JSeparator();
         slotGUIS = new ArrayList<>();
@@ -104,9 +105,11 @@ public class RoomGUI extends JPanel implements ActionListener {
         }
 
         levelSelector = new JComboBox<>(levels);
-        levelSelector.setBounds(730, 10, 150, 25);
+        levelSelector.setBounds(350, 40, 100, 25);
         levelSelector.setSelectedIndex(0);
         levelSelector.setEditable(false);
+        levelSelector.setBackground(Color.decode("#E1FFFF"));
+        levelSelector.setFont(new Font(Constants.NORMAL_FONT, Font.BOLD, 12));
         levelSelector.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 String levelName = e.getItem().toString();
@@ -115,17 +118,13 @@ public class RoomGUI extends JPanel implements ActionListener {
         });
         levelSelector.setEnabled(false);
 
-        exitBtn.setBounds(20, 10, 110, 25);
-        exitBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 14));
         readyBtn.setBounds(20, 540, 110, 25);
         readyBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 26));
         separator.setBounds(20, 525, 860, 10);
 
-        exitBtn.addActionListener(this);
         readyBtn.addActionListener(this);
 
         add(levelSelector);
-        add(exitBtn);
         add(readyBtn);
         add(separator);
 
@@ -159,14 +158,14 @@ public class RoomGUI extends JPanel implements ActionListener {
 
     private void exitRoom() {
         exitScreen();
-        room.shutdown();
+        roomServer.shutdown();
     }
 
     private void backToHome() {
         if (managerGUI == null)
             managerGUI = ManagerGUI.getInstance();
         managerGUI.navigate(Constants.HOME_SCREEN);
-        if (room != null)
+        if (roomServer != null)
             exitRoom();
         if (player != null)
             player.close();
@@ -175,9 +174,7 @@ public class RoomGUI extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitBtn) {
-            backToHome();
-        } else if (e.getSource() == startGameBtn) {
+        if (e.getSource() == startGameBtn) {
             player.sendStartGameRequest(1);
             startGame();
         } else if (e.getSource() == readyBtn) {

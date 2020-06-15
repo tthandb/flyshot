@@ -1,6 +1,7 @@
 package client;
 
 import model.AppPreferences;
+import model.Level;
 import packet.*;
 
 public class ClientListener {
@@ -31,8 +32,10 @@ public class ClientListener {
     }
 
     private void controlUpdateRoom(RoomUpdate roomUpdate, Client client) {
-        System.out.println("--------------------RoomGUI Info--------------------");
+        System.out.println("----------------------------------------------------");
+        System.out.println("ROOM INFO");
         System.out.println("Level: " + roomUpdate.level);
+        Level.setSpeed(roomUpdate.level);
         roomUpdate.clients.forEach(e -> {
             System.out.println("\tPosition: " + roomUpdate.clients.indexOf(e) + "\n" +
                     "\tID: " + e.id + "\n" +

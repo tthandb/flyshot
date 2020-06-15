@@ -59,8 +59,8 @@ public class Connection implements Runnable {
                 }
             } else {
 
-                Room.clients.removeIf(client -> client.id == this.id);
-                RoomUpdate roomUpdate = new RoomUpdate(Room.clients, Room.getLevel());
+                RoomServer.clients.removeIf(client -> client.id == this.id);
+                RoomUpdate roomUpdate = new RoomUpdate(RoomServer.clients, RoomServer.getLevel());
                 for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
                     Connection connection = entry.getValue();
                     if (connection.id != this.id) {

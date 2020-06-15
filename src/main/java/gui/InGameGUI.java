@@ -33,7 +33,7 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
         } else {
             JOptionPane.showMessageDialog(this, "Player in InGameScreen is null", "No Connection", JOptionPane.WARNING_MESSAGE);
         }
-
+        setBackground(Color.decode("#fee9e9"));
         setSize(width, height);
         setVisible(true);
 
@@ -147,9 +147,9 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
         for (Bullet bullet : bullets) {
             bullet.render(g);
         }
-
-        g.setColor(Color.BLUE);
-        g.drawString(getPlayersScore(), 70, 500);
+        g.setFont(new Font(Constants.NORMAL_FONT, Font.BOLD, 12));
+        g.setColor(Color.BLACK);
+        g.drawString(getPlayersScore(), 200, 500);
     }
 
     private String getPlayersScore() {
@@ -157,6 +157,9 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
         return String.format("Total score: %d", totalScore);
     }
 
+    private String getLives() {
+        int lives = PlayerInGame::getLives
+    }
 
     @Subscribe
     public void onGameStartEvent(StartGameResponse startGameResponsePacket) {

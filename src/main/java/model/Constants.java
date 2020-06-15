@@ -2,7 +2,7 @@ package model;
 
 public class Constants {
     public static final int HOST_PORT = 6666;
-    public static final int MAX_ROOM_SIZE = 4;
+    public static final int MAX_ROOM_SIZE = 3;
 
     public static final int GAME_WIDTH = 400;
     public static final int GAME_HEIGHT = 400;
@@ -24,5 +24,5 @@ public class Constants {
     public static final String EXISTED_ROOM_SCREEN = "ExistedRoomScreen";
     public static final String INGAME_SCREEN = "InGameScreen";
 
-    public static final String NORMAL_FONT = "Pacifico";
+    public static final String NORMAL_FONT = "Consolas";
 }

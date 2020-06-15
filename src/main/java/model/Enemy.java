@@ -17,7 +17,7 @@ public class Enemy implements Serializable {
     }
 
     public void tick() {
-        y = y + 1;
+        y = y + Level.speed;
     }
 
     public void render(Graphics g) {

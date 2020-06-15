@@ -23,20 +23,24 @@ public class HomeGUI extends JPanel implements ActionListener {
     }
 
     private void initUI() {
+        setBackground(Color.decode("#fee9e9"));
         createGameBtn = new JButton("Create");
         joinGameBtn = new JButton("Join");
         quitGameBtn = new JButton("Quit");
 
-        JLabel titleLb = new JLabel("Flyshot", SwingConstants.CENTER);
+        JLabel titleLb = new JLabel("FLYSHOT", SwingConstants.CENTER);
 
-        createGameBtn.setBounds(50, 320, 200, 50);
-        createGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 24));
-        joinGameBtn.setBounds(50, 396, 200, 50);
-        joinGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 24));
-        quitGameBtn.setBounds(50, 472, 200, 50);
-        quitGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 24));
+        createGameBtn.setBounds(200, 320, 100, 50);
+        createGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 20));
+        createGameBtn.setBackground(Color.decode("#E1FFFF"));
+        joinGameBtn.setBounds(200, 396, 100, 50);
+        joinGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 20));
+        joinGameBtn.setBackground(Color.decode("#E1FFFF"));
+        quitGameBtn.setBounds(200, 472, 100, 50);
+        quitGameBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 20));
+        quitGameBtn.setBackground(Color.decode("#E1FFFF"));
 
-        titleLb.setBounds(-50, 170, 390, 70);
+        titleLb.setBounds(50, 100, 390, 100);
         titleLb.setFont(new Font(Constants.NORMAL_FONT, Font.BOLD, 46));
 
         quitGameBtn.addActionListener(this);

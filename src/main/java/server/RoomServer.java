@@ -2,20 +2,20 @@ package server;
 
 import client.EventBusClass;
 import com.google.common.eventbus.Subscribe;
+import model.Constants;
 import model.InitGameSetupEvent;
 import packet.InGameAction;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class Room extends Server {
+public class RoomServer extends Server {
     public static ArrayList<WaitingClient> clients;
     public static int level;
     public static GameSetup gameSetup;
 
-    public Room(int port)  {
+    public RoomServer(int port)  {
         super(port);
-        clients = new ArrayList<>(4);
+        clients = new ArrayList<>(Constants.MAX_ROOM_SIZE);
         level = 0;
         EventBusClass.getInstance().register(this);
     }
@@ -25,7 +25,7 @@ public class Room extends Server {
     }
 
     public static void setLevel(int level) {
-        Room.level = level;
+        RoomServer.level = level;
     }
 
     @Subscribe
