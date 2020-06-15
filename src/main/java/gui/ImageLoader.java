@@ -10,9 +10,11 @@ public class ImageLoader {
     public static void init() {
         image = imageLoader("/cyan.png");
         entities = imageLoader("/airplane.png");
-        enemy = entities.getSubimage(0, 0,85, 90);
+        //enemy = entities.getSubimage(0, 0,85, 90);
+        enemy = imageLoader("/enemy.png");
         player = entities.getSubimage(85, 0, 95, 90);
         myPlane = imageLoader("/airplane3.png").getSubimage(0,0,95,90);
+        player = imageLoader("/friend.png").getSubimage(0,0,95,90);
     }
 
     public static BufferedImage imageLoader(String path) {

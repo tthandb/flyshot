@@ -157,10 +157,6 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
         return String.format("Total score: %d", totalScore);
     }
 
-    private String getLives() {
-        int lives = PlayerInGame::getLives
-    }
-
     @Subscribe
     public void onGameStartEvent(StartGameResponse startGameResponsePacket) {
         renderCanvas();
