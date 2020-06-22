@@ -1,4 +1,4 @@
-package client;
+package model;
 
 import com.google.common.eventbus.EventBus;
 

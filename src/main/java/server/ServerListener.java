@@ -1,6 +1,6 @@
 package server;
 
-import client.EventBusClass;
+import model.EventBusClass;
 import model.Constants;
 import model.InitGameSetupEvent;
 import model.PlayerInGame;

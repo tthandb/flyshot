@@ -21,7 +21,7 @@ public class SlotGUI extends JPanel {
 
     private void initUI() {
         playerNameLb = new JLabel("No PlayerInGame", SwingConstants.CENTER);
-        playerNameLb.setBounds(20, 100, 160, 30);
+        playerNameLb.setBounds(0,10 , 100, 30);
         playerNameLb.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 14));
 
         readyIcon = new JPanel();

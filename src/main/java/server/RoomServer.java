@@ -1,6 +1,6 @@
 package server;
 
-import client.EventBusClass;
+import model.EventBusClass;
 import com.google.common.eventbus.Subscribe;
 import model.Constants;
 import model.InitGameSetupEvent;

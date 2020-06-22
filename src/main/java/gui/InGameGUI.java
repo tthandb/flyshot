@@ -1,6 +1,6 @@
 package gui;
 
-import client.EventBusClass;
+import model.EventBusClass;
 import client.Player;
 import com.google.common.eventbus.Subscribe;
 import model.*;
@@ -22,7 +22,7 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
     private ArrayList<PlayerInGame> playerInGames;
     private ArrayList<Bullet> bullets;
     private ArrayList<Enemy> enemies;
-
+    private ManagerGUI managerGUI;
     public static Canvas canvas;
 
     private Player player;
@@ -33,7 +33,7 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
         } else {
             JOptionPane.showMessageDialog(this, "Player in InGameScreen is null", "No Connection", JOptionPane.WARNING_MESSAGE);
         }
-        setBackground(Color.decode("#fee9e9"));
+        setBackground(Color.decode("#b2e0df"));
         setSize(width, height);
         setVisible(true);
 
@@ -164,7 +164,7 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
 
     @Subscribe
     public void onUpdateInGameInfoEvent(UpdateInGame event) {
-//        System.out.println(String.format("IngameScreen - receive update game info event: %d players - %d bullets - %d enemies", event.playerInGames.size(), event.bullets.size(), event.enemies.size()));
+        System.out.println(String.format("IngameScreen - receive update game info event: %d players - %d bullets - %d enemies", event.playerInGames.size(), event.bullets.size(), event.enemies.size()));
 
         this.playerInGames.clear();
         this.bullets.clear();

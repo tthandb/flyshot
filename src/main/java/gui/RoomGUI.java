@@ -1,6 +1,6 @@
 package gui;
 
-import client.EventBusClass;
+import model.EventBusClass;
 import client.Player;
 import com.google.common.eventbus.Subscribe;
 import model.Constants;
@@ -40,7 +40,7 @@ public class RoomGUI extends JPanel implements ActionListener {
         levels.add("Super");
         setSize(width, height);
         setLayout(null);
-        setBackground(Color.decode("#fee9e9"));
+        setBackground(Color.decode("#b2e0df"));
         initUI();
         setVisible(false);
         if (args != null) {
@@ -118,8 +118,10 @@ public class RoomGUI extends JPanel implements ActionListener {
         });
         levelSelector.setEnabled(false);
 
-        readyBtn.setBounds(20, 540, 110, 25);
-        readyBtn.setFont(new Font(Constants.NORMAL_FONT, Font.PLAIN, 26));
+        readyBtn.setBounds(50, 40, 70, 25);
+        readyBtn.setFont(new Font(Constants.NORMAL_FONT, Font.BOLD, 12));
+        readyBtn.setBackground(Color.decode("#E1FFFF"));
+
         separator.setBounds(20, 525, 860, 10);
 
         readyBtn.addActionListener(this);
@@ -161,7 +163,7 @@ public class RoomGUI extends JPanel implements ActionListener {
         roomServer.shutdown();
     }
 
-    private void backToHome() {
+    public void backToHome() {
         if (managerGUI == null)
             managerGUI = ManagerGUI.getInstance();
         managerGUI.navigate(Constants.HOME_SCREEN);
@@ -209,9 +211,9 @@ public class RoomGUI extends JPanel implements ActionListener {
 
 
     @Subscribe
-    public void onUpdateRoomInfoEvent(RoomUpdate roomUpdateInfoPacket) {
-        renderPlayerList(roomUpdateInfoPacket.clients);
-        renderGameLevel(roomUpdateInfoPacket.level);
+    public void onUpdateRoomInfoEvent(RoomUpdate roomUpdate) {
+        renderPlayerList(roomUpdate.clients);
+        renderGameLevel(roomUpdate.level);
     }
 
     @Subscribe

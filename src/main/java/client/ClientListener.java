@@ -1,6 +1,7 @@
 package client;
 
 import model.AppPreferences;
+import model.EventBusClass;
 import model.Level;
 import packet.*;
 

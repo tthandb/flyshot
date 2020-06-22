@@ -70,7 +70,7 @@ public class Client implements Runnable {
             while (flag) {
                 try {
                     Object data = objectInputStream.readObject();
-                    clientListener.received(data, this);
+                    clientListener. received(data, this);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SocketException e) {

@@ -32,7 +32,6 @@ public class GameManager {
             playerInGame.init();
             playerInGames.add(playerInGame);
         }
-
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
 
@@ -107,7 +106,7 @@ public class GameManager {
         }
 
         if (playerInGames.isEmpty())
-            System.out.println("Loss");
+            System.exit(1);
 
 
         enemies.removeAll(enemySet);
