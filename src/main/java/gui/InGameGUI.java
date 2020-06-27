@@ -5,8 +5,9 @@ import client.Player;
 import com.google.common.eventbus.Subscribe;
 import model.*;
 import packet.InGameAction;
+import packet.LoseGame;
 import packet.StartGameResponse;
-import packet.UpdateInGame;
+import packet.InGameUpdate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -158,12 +159,19 @@ public class InGameGUI extends JPanel implements ActionListener, KeyListener {
     }
 
     @Subscribe
+    public void onLoseGame(LoseGame loseGame) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("player", player);
+        ManagerGUI.getInstance().navigate(Constants.EXISTED_ROOM_SCREEN, args);
+    }
+
+    @Subscribe
     public void onGameStartEvent(StartGameResponse startGameResponsePacket) {
         renderCanvas();
     }
 
     @Subscribe
-    public void onUpdateInGameInfoEvent(UpdateInGame event) {
+    public void onUpdateInGameInfoEvent(InGameUpdate event) {
         System.out.println(String.format("IngameScreen - receive update game info event: %d players - %d bullets - %d enemies", event.playerInGames.size(), event.bullets.size(), event.enemies.size()));
 
         this.playerInGames.clear();

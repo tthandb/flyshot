@@ -1,7 +1,6 @@
 package model;
 
 import gui.ImageLoader;
-import packet.AddConnectionResponse;
 import server.GameManager;
 
 import java.awt.*;
@@ -48,10 +47,6 @@ public class PlayerInGame implements Serializable {
                     current = System.nanoTime();
                 }
             }
-        }
-        else {
-            AddConnectionResponse addConnectionResponse = new AddConnectionResponse(-1, false , "You lose");
-
         }
     }
 

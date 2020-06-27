@@ -13,7 +13,7 @@ public class ImageLoader {
         //enemy = entities.getSubimage(0, 0,85, 90);
         enemy = imageLoader("/enemy.png");
         player = entities.getSubimage(85, 0, 95, 90);
-        myPlane = imageLoader("/airplane3.png").getSubimage(0,0,95,90);
+        myPlane = imageLoader("/airplane.png").getSubimage(0,0,95,90);
         player = imageLoader("/friend.png").getSubimage(0,0,95,90);
     }
 

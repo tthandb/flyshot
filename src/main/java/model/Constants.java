@@ -19,10 +19,10 @@ public class Constants {
     public static final int SLOT_WIDTH = 400;
     public static final int SLOT_HEIGHT = 50;
 
-    public static final String HOME_SCREEN = "HomeScreen";
-    public static final String NEW_ROOM_SCREEN = "NewRoomScreen";
-    public static final String EXISTED_ROOM_SCREEN = "ExistedRoomScreen";
-    public static final String INGAME_SCREEN = "InGameScreen";
+    public static final String HOME_SCREEN = "HOME";
+    public static final String NEW_ROOM_SCREEN = "NEWROOM";
+    public static final String EXISTED_ROOM_SCREEN = "EXISTEDROOM";
+    public static final String INGAME_SCREEN = "INGAME";
 
     public static final String NORMAL_FONT = "Consolas";
 }

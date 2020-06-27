@@ -2,7 +2,7 @@ package server;
 
 import model.PlayerInGame;
 import packet.InGameAction;
-import packet.UpdateInGame;
+import packet.InGameUpdate;
 
 import java.util.Map;
 
@@ -62,10 +62,10 @@ public class GameSetup implements Runnable {
     }
 
     private void sendNewInGameStateToClients() {
-        UpdateInGame updateInGame = new UpdateInGame(gameManager.playerInGames, GameManager.bullets, GameManager.enemies);
+        InGameUpdate inGameUpdate = new InGameUpdate(gameManager.playerInGames, GameManager.bullets, GameManager.enemies);
         for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
             Connection connection = entry.getValue();
-            connection.sendObject(updateInGame);
+            connection.sendObject(inGameUpdate);
         }
     }
 

@@ -12,11 +12,9 @@ client\ConnectionList.class
 model\InitGameSetupEvent.class
 gui\HomeGUI.class
 packet\RemoveConnection.class
-gui\PlayerHolder.class
 packet\AddConnectionResponse.class
 gui\ImageLoader.class
 packet\StartGameResponse.class
-server\Room.class
 model\AppPreferences.class
 gui\ManagerGUI.class
 gui\RoomGUI.class
@@ -24,7 +22,6 @@ server\WaitingClient.class
 model\Enemy.class
 server\GameSetup$1.class
 packet\ServerClosure.class
-client\EventBusClass.class
 packet\StartGameRequest.class
 server\Server.class
 model\PlayerInGame.class

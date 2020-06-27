@@ -1,5 +1,6 @@
 package client;
 
+import com.google.common.eventbus.EventBus;
 import model.AppPreferences;
 import model.EventBusClass;
 import model.Level;
@@ -26,10 +27,19 @@ public class ClientListener {
         } else if (object instanceof StartGameResponse) {
             StartGameResponse startGameResponse = (StartGameResponse) object;
             controlStartGameResponse(startGameResponse);
-        } else if (object instanceof UpdateInGame) {
-            UpdateInGame packet = (UpdateInGame) object;
+        } else if (object instanceof InGameUpdate) {
+            InGameUpdate packet = (InGameUpdate) object;
             controlUpdateInGame(packet);
         }
+        else if(object instanceof LoseGame){
+            LoseGame packet = (LoseGame) object;
+            controlLoseGame(packet, client);
+
+        }
+    }
+
+    private void controlLoseGame(LoseGame packet, Client client) {
+        EventBusClass.getInstance().post(packet);
     }
 
     private void controlUpdateRoom(RoomUpdate roomUpdate, Client client) {
@@ -77,7 +87,7 @@ public class ClientListener {
         EventBusClass.getInstance().post(packet);
     }
 
-    private void controlUpdateInGame(UpdateInGame packet) {
+    private void controlUpdateInGame(InGameUpdate packet) {
         EventBusClass.getInstance().post(packet);
     }
 }

@@ -4,11 +4,9 @@ import model.Bullet;
 import model.Constants;
 import model.Enemy;
 import model.PlayerInGame;
+import packet.LoseGame;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GameManager {
@@ -86,6 +84,14 @@ public class GameManager {
                     System.out.println("P" + playerInGame.getPosition() + " : " + playerInGame.getLives());
                     if (playerInGame.getLives() <= 0) {
                         System.out.println("P" + playerInGame.getPosition() + " : " + "Died");
+                        for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
+                            Connection connection = entry.getValue();
+                            if (connection.id != playerInGame.id) {
+                                LoseGame loseGame = new LoseGame(connection.id, false);
+                                connection.sendObject(loseGame);
+                            }
+
+                        }
                         playerInGameSet.add(playerInGame);
                     }
                 }
@@ -105,8 +111,13 @@ public class GameManager {
             }
         }
 
-        if (playerInGames.isEmpty())
-            System.exit(1);
+        if (playerInGames.isEmpty()) {
+            for (Map.Entry<Integer, Connection> entry : ConnectionList.connections.entrySet()) {
+                Connection connection = entry.getValue();
+
+            }
+
+        }
 
 
         enemies.removeAll(enemySet);
